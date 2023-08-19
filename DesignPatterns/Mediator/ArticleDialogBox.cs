@@ -1,6 +1,6 @@
 ﻿namespace DesignPatterns.Mediator
 {
-    public class ArticleDialogBox //: DialogBox
+    public class ArticleDialogBox : DialogBox
     {
         private readonly ListBox _listBox;
         private readonly TextBox _textBox;
@@ -9,12 +9,9 @@
 
         public ArticleDialogBox()
         {
-            _listBox = new ListBox();
-            _textBox = new TextBox();
-            _button = new Button();
-
-            _listBox.Attach();
-            
+            _listBox = new ListBox(this);
+            _textBox = new TextBox(this);
+            _button = new Button(this);
         }
 
 
@@ -25,19 +22,25 @@
             Console.WriteLine($"Button: {_button.Enable}");
         }
 
-       
-        //public override void Changed(UiControl control)
-        //{
-        //    if (control == _listBox)
-        //    {
-        //        _textBox.Content = _listBox.Selection;
-        //        _button.Enable=true;
-        //    }else if (control == _textBox)
-        //    {
-        //        if(_textBox.Content.Length==0)
-        //            _button.Enable=false;
-        //    }
-        //}
+        public override void Changed(UiControl control)
+        {
+            if (control == _listBox)
+                ArticleSelected();
+            else if (control == _textBox)
+                TitleChange();
+            
+        }
 
+        private void TitleChange()
+        {
+            var isEmpty = string.IsNullOrEmpty(_textBox.Content);
+            _button.Enable=!isEmpty;
+        }
+
+        private void ArticleSelected()
+        {
+            _textBox.Content = _listBox.Selection;
+            _button.Enable = true;
+        }
     }
 }

@@ -3,10 +3,9 @@
     public class Button : UiControl
     {
         private bool _isEnable;
-        //public Button(DialogBox owner) : base(owner)
-        //{
-        //}
-
+        public Button(DialogBox owner) : base(owner)
+        {
+        }
 
         public bool Enable
         {
@@ -14,15 +13,11 @@
             set
             {
                 _isEnable = value;
-                //Owner.Changed(this);
-                Notify();
+                _owner.Changed(this);
             }
         }
 
 
-        
-
-
-        
+       
     }
 }

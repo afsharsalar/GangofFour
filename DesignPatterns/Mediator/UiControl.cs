@@ -1,26 +1,12 @@
 ﻿namespace DesignPatterns.Mediator
 {
-    public abstract class UiControl
+    public class UiControl
     {
-        //protected DialogBox Owner;
+        protected DialogBox _owner;
 
-        //public UiControl(DialogBox owner)
-        //{
-        //    Owner = owner;
-        //}
-        private List<IObserver> _observers = new List<IObserver>();
-
-        public void Attach(IObserver observer)
+        public UiControl(DialogBox owner)
         {
-            _observers.Add(observer);
-        }
-
-        protected void Notify()
-        {
-            foreach (var observer in _observers)
-            {
-                observer.Update();
-            }
+            _owner = owner;
         }
     }
 }
