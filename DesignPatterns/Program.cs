@@ -6,6 +6,7 @@ using DesignPatterns.Observer;
 using DesignPatterns.State;
 using DesignPatterns.Strategy;
 using DesignPatterns.Template;
+using DesignPatterns.Visitor;
 using Button = DesignPatterns.Command.Button;
 
 namespace DesignPatterns
@@ -109,6 +110,19 @@ namespace DesignPatterns
             var auth = new Authenticator(logger);
             var server = new WebServer(auth);
             server.Handle(new HttpRequest("admin","admin"));
+
+            #endregion
+
+
+
+            #region Visitor
+
+            var document = new HtmlDocument();
+            document.Add(new HeadingNode());
+            document.Add(new AnchorNode());
+
+            document.Execute(new HighlightOperation());
+            document.Execute(new PlainTextOperation());
 
             #endregion
         }
