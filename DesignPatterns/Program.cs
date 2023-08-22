@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Command;
+﻿using DesignPatterns.ChainOfResponsibility;
+using DesignPatterns.Command;
 using DesignPatterns.Mediator;
 using DesignPatterns.Momento;
 using DesignPatterns.Observer;
@@ -96,6 +97,18 @@ namespace DesignPatterns
 
             var dialog = new ArticleDialogBox();
             dialog.OutPut();
+
+            #endregion
+
+
+            #region ChainOfResponsibility
+
+
+            var compressor = new Compressor(null);
+            var logger = new Logger(compressor);
+            var auth = new Authenticator(logger);
+            var server = new WebServer(auth);
+            server.Handle(new HttpRequest("admin","admin"));
 
             #endregion
         }
