@@ -1,15 +1,18 @@
-﻿using DesignPatterns.ChainOfResponsibility;
-using DesignPatterns.Command;
-using DesignPatterns.Mediator;
-using DesignPatterns.Momento;
-using DesignPatterns.Observer;
-using DesignPatterns.State;
-using DesignPatterns.Strategy;
-using DesignPatterns.Strategy.Compress;
-using DesignPatterns.Strategy.Filter;
-using DesignPatterns.Template;
-using DesignPatterns.Visitor;
-using Button = DesignPatterns.Command.Button;
+﻿using DesignPatterns.Behavioral.Command;
+using DesignPatterns.Behavioral.ChainOfResponsibility;
+using DesignPatterns.Behavioral.Mediator;
+using DesignPatterns.Behavioral.Momento;
+using DesignPatterns.Behavioral.Observer;
+using DesignPatterns.Behavioral.State;
+using DesignPatterns.Behavioral.Strategy;
+using DesignPatterns.Behavioral.Strategy.Compress;
+using DesignPatterns.Behavioral.Strategy.Filter;
+using DesignPatterns.Structural.Composite;
+using DesignPatterns.Behavioral.Template;
+using DesignPatterns.Behavioral.Visitor;
+using DesignPatterns.Structural.Adapter;
+using DesignPatterns.Structural.Adapter.AvaFilter;
+using Button = DesignPatterns.Behavioral.Command.Button;
 
 namespace DesignPatterns
 {
@@ -126,6 +129,37 @@ namespace DesignPatterns
             document.Execute(new HighlightOperation());
             document.Execute(new PlainTextOperation());
 
+            #endregion
+
+
+            #region Composite
+
+            var group1 = new Group();
+            group1.Add(new Shape());
+            group1.Add(new Shape());
+
+
+            var group2 = new Group();
+            group2.Add(new Shape());
+            group2.Add(new Shape());
+
+
+            var group = new Group();
+            group.Add(group1);
+            group.Add(group2);
+
+
+            group.Render();
+            group.Move();
+
+            #endregion
+
+
+            #region Adapter
+
+            var imageView = new ImageView(new Image());
+            imageView.Apply(new CaramelAdapter());
+            
             #endregion
         }
     }
