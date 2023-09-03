@@ -1,4 +1,4 @@
-﻿namespace DesignPatterns.ChainOfResponsibility
+﻿ namespace DesignPatterns.ChainOfResponsibility
 {
     public class Compressor : Handler
     {

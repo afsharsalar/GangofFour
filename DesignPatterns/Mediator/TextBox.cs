@@ -15,7 +15,5 @@
                 _owner.Changed(this);
             }
         }
-
-       
     }
 }

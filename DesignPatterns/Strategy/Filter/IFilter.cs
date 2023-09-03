@@ -1,4 +1,4 @@
-﻿namespace DesignPatterns.Strategy
+﻿namespace DesignPatterns.Strategy.Filter
 {
     public interface IFilter
     {

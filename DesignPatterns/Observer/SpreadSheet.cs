@@ -2,7 +2,7 @@
 {
     public class SpreadSheet : IObserver
     {
-        private DataSource _dataSource;
+        private readonly DataSource _dataSource;
 
         public SpreadSheet(DataSource dataSource)
         {

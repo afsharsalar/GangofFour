@@ -1,4 +1,7 @@
-﻿namespace DesignPatterns.Strategy
+﻿using DesignPatterns.Strategy.Compress;
+using DesignPatterns.Strategy.Filter;
+
+namespace DesignPatterns.Strategy
 {
     public class ImageStorage
     {

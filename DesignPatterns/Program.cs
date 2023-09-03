@@ -5,6 +5,8 @@ using DesignPatterns.Momento;
 using DesignPatterns.Observer;
 using DesignPatterns.State;
 using DesignPatterns.Strategy;
+using DesignPatterns.Strategy.Compress;
+using DesignPatterns.Strategy.Filter;
 using DesignPatterns.Template;
 using DesignPatterns.Visitor;
 using Button = DesignPatterns.Command.Button;
@@ -21,25 +23,25 @@ namespace DesignPatterns
             var editor = new Editor();
             var history = new History();
 
-            editor.Set("A");
+            editor.Content="A";
             history.Push(editor.CreateState());
 
-            editor.Set("B");
+            editor.Content="B";
             history.Push(editor.CreateState());
 
 
-            editor.Set("C");
+            editor.Content="C";
 
             editor.Restore(history.Pop());
 
-            Console.WriteLine("content of editor is : " + editor.Get());
+            Console.WriteLine("content of editor is : " + editor.Content);
             #endregion
 
             #region State
             //OCP (Open Close Principle)
             var canvas = new Canvas
             {
-                Tool = new SelectionTool()
+                Tool = new BrushTool()
             };
             canvas.MouseDown();
             canvas.MouseUp();

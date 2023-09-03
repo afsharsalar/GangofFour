@@ -3,9 +3,9 @@
     /// <summary>
     /// observable
     /// </summary>
-    public class Subject
+    public abstract class Subject
     {
-        private List<IObserver> _observers = new List<IObserver>();
+        private readonly List<IObserver> _observers = new List<IObserver>();
         public void AddObserver(IObserver observer)
         {
             _observers.Add(observer);
