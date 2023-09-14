@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Behavioral.Command;
+﻿using System.Security.Cryptography.X509Certificates;
+using DesignPatterns.Behavioral.Command;
 using DesignPatterns.Behavioral.ChainOfResponsibility;
 using DesignPatterns.Behavioral.Mediator;
 using DesignPatterns.Behavioral.Momento;
@@ -12,6 +13,8 @@ using DesignPatterns.Behavioral.Template;
 using DesignPatterns.Behavioral.Visitor;
 using DesignPatterns.Structural.Adapter;
 using DesignPatterns.Structural.Adapter.AvaFilter;
+using DesignPatterns.Structural.Bridge;
+using DesignPatterns.Structural.Decorator;
 using Button = DesignPatterns.Behavioral.Command.Button;
 
 namespace DesignPatterns
@@ -51,8 +54,7 @@ namespace DesignPatterns
 
 
             #endregion
-
-
+            
             #region Strategy
 
 
@@ -61,16 +63,14 @@ namespace DesignPatterns
             imageStore.Store("sample.jpg",new PngCompress(),new CustomFilter());
 
             #endregion
-
-
+            
             #region Template
 
             var task = new TransferMoneyTask(new AuditTrail());
             task.Execute();
 
             #endregion
-
-
+            
             #region Command
 
             var service = new CustomerService();
@@ -79,8 +79,7 @@ namespace DesignPatterns
             button.Click();
 
             #endregion
-
-
+            
             #region Observer
 
             var dataSource = new DataSource();
@@ -96,8 +95,7 @@ namespace DesignPatterns
             dataSource.Set(10);;
 
             #endregion
-
-
+            
             #region Mediator
 
 
@@ -105,8 +103,7 @@ namespace DesignPatterns
             dialog.OutPut();
 
             #endregion
-
-
+            
             #region ChainOfResponsibility
 
 
@@ -117,9 +114,7 @@ namespace DesignPatterns
             server.Handle(new HttpRequest("admin","admin"));
 
             #endregion
-
-
-
+            
             #region Visitor
 
             var document = new HtmlDocument();
@@ -130,8 +125,7 @@ namespace DesignPatterns
             document.Execute(new PlainTextOperation());
 
             #endregion
-
-
+            
             #region Composite
 
             var group1 = new Group();
@@ -153,14 +147,37 @@ namespace DesignPatterns
             group.Move();
 
             #endregion
-
-
+            
             #region Adapter
 
             var imageView = new ImageView(new Image());
+            imageView.Apply(new VividFilter());
             imageView.Apply(new CaramelAdapter());
+
+            #endregion
+
+
+            #region Decorator
             
+            StoreCreditCard(new CloudStream());
+            StoreCreditCard(new EncryptedCloudStream(new CloudStream()));
+            StoreCreditCard(new EncryptedCloudStream(new CompressCloudStream(new CloudStream())));
+
+            #endregion
+
+
+            #region Bridge
+
+            var control = new AdvanceRemoteControl(new SamsungTv());
+            control.TurnOn();
+
             #endregion
         }
+
+        public static void StoreCreditCard(IStream stream)
+        {
+            stream.Write("6104-8896-7856-9654");
+        }
+         
     }
 }
